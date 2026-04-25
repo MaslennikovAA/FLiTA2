@@ -43,7 +43,7 @@ int readgraph (Edge **edges, int *numEdges, int *numVertices) {
             } else if (count == 2) {
                 (*edges)[i].v = j + 1;
             } else {
-                printf("WARNING: Vertice %d is connected to more than two edges (column %d)\n", i+1, j);
+                printf("WARNING: Edge %d is connected to more than two vertices\n", i+1);
             }
         }
     }
