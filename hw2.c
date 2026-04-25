@@ -52,7 +52,7 @@ int readgraph (Edge **edges, int *numEdges, int *numVertices) {
                     (*edges)[i].u = j + 1;
                     (*edges)[i].v = j + 1;
                 } else {
-                    printf("WARNING: Loop %d is connected to more than two vertices\n", i+1);
+                    printf("WARNING: Loop %d is connected to more than one vertice\n", i+1);
                 }
             }
         }
