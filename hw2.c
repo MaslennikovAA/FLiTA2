@@ -6,7 +6,7 @@ typedef struct {
     int v;
 } Edge;
 
-int readgraph (const char *filename, Edge **edges, int *numEdges, int *numVertices) {
+int readgraph (Edge **edges, int *numEdges, int *numVertices) {
     FILE *pFile = fopen("incidencematrix.txt", "r");
     if (pFile == NULL) {
         printf("Error opening file");
@@ -82,7 +82,7 @@ int writeDotFile(Edge *edges, int numEdges, const char *outputFile, int Ver) {
 int main() {
     Edge *edges;
     int numEdges, numVertices;
-    readgraph("incidencematrix.txt", &edges, &numEdges, &numVertices);
+    readgraph(&edges, &numEdges, &numVertices);
     printEdges(edges, &numEdges);
     writeDotFile(edges, numEdges, "Graph.dot", numVertices);
     free(edges);
