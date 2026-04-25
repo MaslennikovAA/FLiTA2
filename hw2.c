@@ -14,7 +14,7 @@ int readgraph (Edge **edges, int *numEdges, int *numVertices) {
     }
     fscanf(pFile, "%d %d", numVertices, numEdges);
     *edges = malloc((*numEdges) * sizeof(Edge));
-    if (edges==NULL) {
+    if (*edges==NULL) {
         printf("Memory allocation failed");
         return 1;
     }
@@ -32,21 +32,30 @@ int readgraph (Edge **edges, int *numEdges, int *numVertices) {
     }
     printf("========================================\n");
     for (int i = 0; i < *numEdges; i++) {
-    (*edges)[i].u = -1;
-    (*edges)[i].v = -1;
-    int count = 0;
-    for (int j = 0; j < *numVertices; j++) {
-        if (IncidenceMatrix[i][j] == 1) {
-            count++;
-            if (count == 1) {
-                (*edges)[i].u = j + 1;
-            } else if (count == 2) {
-                (*edges)[i].v = j + 1;
-            } else {
-                printf("WARNING: Vertice %d is connected to more than two edges (column %d)\n", i+1, j);
+        (*edges)[i].u = -1;
+        (*edges)[i].v = -1;
+        int count = 0;
+        for (int j = 0; j < *numVertices; j++) {
+            if (IncidenceMatrix[i][j] == 1) {
+                count++;
+                if (count == 1) {
+                    (*edges)[i].u = j + 1;
+                } else if (count == 2) {
+                    (*edges)[i].v = j + 1;
+                } else {
+                    printf("WARNING: Edge %d is connected to more than two vertices\n", i+1);
+                }
+            }
+            else if (IncidenceMatrix[i][j] == 2) {
+                count+=2;
+                if (count == 2) {
+                    (*edges)[i].u = j + 1;
+                    (*edges)[i].v = j + 1;
+                } else {
+                    printf("WARNING: Loop %d is connected to more than two vertices\n", i+1);
+                }
             }
         }
-    }
     }
     fclose(pFile);
     return 0;
