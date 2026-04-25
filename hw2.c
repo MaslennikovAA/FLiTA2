@@ -43,7 +43,7 @@ int readgraph (Edge **edges, int *numEdges, int *numVertices) {
             } else if (count == 2) {
                 (*edges)[i].v = j + 1;
             } else {
-                printf("WARNING: Edge %d is connected to more than two vertices\n", i+1);
+                printf("WARNING: Vertice %d is connected to more than two edges (column %d)\n", i+1, j);
             }
         }
     }
@@ -60,8 +60,8 @@ int printEdges (Edge *edges, int *numEdges) {
     return 0;
 }
 
-int writeDotFile(Edge *edges, int numEdges, const char *outputFile, int Ver) {
-    FILE *dotFile = fopen(outputFile, "w");
+int writeDotFile(Edge *edges, int numEdges, int Ver) {
+    FILE *dotFile = fopen("Graph.dot", "w");
     if (dotFile==NULL) {
         printf("Error opening file");
         return 1;
@@ -84,7 +84,7 @@ int main() {
     int numEdges, numVertices;
     readgraph(&edges, &numEdges, &numVertices);
     printEdges(edges, &numEdges);
-    writeDotFile(edges, numEdges, "Graph.dot", numVertices);
+    writeDotFile(edges, numEdges, numVertices);
     free(edges);
     edges = NULL;
     return 0;
