@@ -14,7 +14,7 @@ int readgraph (Edge **edges, int *numEdges, int *numVertices) {
     }
     fscanf(pFile, "%d %d", numVertices, numEdges);
     *edges = malloc((*numEdges) * sizeof(Edge));
-    if (edges==NULL) {
+    if (*edges==NULL) {
         printf("Memory allocation failed");
         return 1;
     }
